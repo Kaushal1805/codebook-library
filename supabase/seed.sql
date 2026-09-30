@@ -1,0 +1,217 @@
+-- Insert Categories
+INSERT INTO public.categories (name, slug, description) VALUES
+('SQL', 'sql', 'Structured Query Language databases and interview prep'),
+('Python', 'python', 'General Python scripting, OOP, and automation prep'),
+('Data Analytics', 'data-analytics', 'Data preparation, Pandas, statistics, and analysis handbook'),
+('Machine Learning', 'machine-learning', 'Supervised/Unsupervised ML, algorithms, math, and system design'),
+('DSA', 'dsa', 'Data Structures and Algorithms LeetCode prep'),
+('LangChain', 'langchain', 'Chains, Agents, and LLM orchestration with LangChain'),
+('RAG', 'rag', 'Retrieval-Augmented Generation basics and vector databases'),
+('GenAI', 'genai', 'Generative AI concepts, prompt engineering, and LLM basics'),
+('MLOps', 'mlops', 'Production machine learning, model registries, CI/CD, and Kubernetes')
+ON CONFLICT (name) DO NOTHING;
+
+-- Insert Books (using SQL subqueries to fetch category_id)
+INSERT INTO public.books (title, slug, author, short_description, full_description, category_id, difficulty, price, page_count, status, free_preview_pages, rating, review_count, published_at) VALUES
+(
+  'SQL Interview Mastery', 
+  'sql-interview-mastery', 
+  'Alex Mercer', 
+  'Master SQL queries, joins, window functions, and optimization techniques commonly asked in data engineering interviews.',
+  'This book provides a comprehensive, hands-on approach to tackling the most challenging SQL interview questions. It skips the basic introductory material and dives straight into the complex scenarios you''ll face at top tech companies.',
+  (SELECT id FROM public.categories WHERE slug = 'sql'),
+  'intermediate', 
+  19.99, 
+  240, 
+  'published', 
+  3, 
+  4.8, 
+  342, 
+  NOW()
+),
+(
+  '200 SQL Interview Questions', 
+  '200-sql-interview-questions', 
+  'Sarah Chen', 
+  'A rapid-fire collection of 200 SQL questions ranging from basic syntax to advanced analytical queries.',
+  'The perfect companion for quick interview preparation. This book contains 200 carefully curated questions covering every aspect of SQL, organized by difficulty.',
+  (SELECT id FROM public.categories WHERE slug = 'sql'),
+  'beginner', 
+  0.00, 
+  180, 
+  'published', 
+  3, 
+  4.5, 
+  890, 
+  NOW()
+),
+(
+  'Python Interview Questions', 
+  'python-interview-questions', 
+  'David Kumar', 
+  'Comprehensive collection of Python problems covering data structures, OOP, decorators, and real-world coding challenges.',
+  'Move beyond standard LeetCode problems with Python-specific interview questions. Learn how to write pythonic code that impresses interviewers.',
+  (SELECT id FROM public.categories WHERE slug = 'python'),
+  'intermediate', 
+  17.99, 
+  310, 
+  'published', 
+  3, 
+  4.7, 
+  512, 
+  NOW()
+),
+(
+  'Python for Data Analytics', 
+  'python-for-data-analytics', 
+  'Elena Rodriguez', 
+  'Learn how to use Python, Pandas, and NumPy to clean, analyze, and visualize complex datasets.',
+  'The definitive guide to doing data analysis in Python. This book walks you through the entire data pipeline from extraction to visualization.',
+  (SELECT id FROM public.categories WHERE slug = 'python'),
+  'beginner', 
+  24.99, 
+  420, 
+  'published', 
+  3, 
+  4.9, 
+  1205, 
+  NOW()
+),
+(
+  'Pandas Interview Guide', 
+  'pandas-interview-guide', 
+  'James Wilson', 
+  'Ace your data manipulation interviews with 100+ Pandas coding challenges and detailed solutions.',
+  'A focused study guide strictly for Pandas interview rounds. Learn the most efficient ways to solve data manipulation tasks without resorting to slow loops.',
+  (SELECT id FROM public.categories WHERE slug = 'data-analytics'),
+  'intermediate', 
+  14.99, 
+  200, 
+  'published', 
+  3, 
+  4.6, 
+  280, 
+  NOW()
+),
+(
+  'Data Analyst Interview Handbook', 
+  'data-analyst-interview-handbook', 
+  'Maria Garcia', 
+  'End-to-end preparation for data analyst roles — statistics, Excel, SQL, visualization, and business case studies.',
+  'More than just coding, this handbook covers the business and statistical aspects of data analyst interviews, including product sense and A/B testing.',
+  (SELECT id FROM public.categories WHERE slug = 'data-analytics'),
+  'intermediate', 
+  22.99, 
+  280, 
+  'published', 
+  3, 
+  4.8, 
+  450, 
+  NOW()
+),
+(
+  'Machine Learning Interview Guide', 
+  'machine-learning-interview-guide', 
+  'Dr. Alan Turing', 
+  'From linear regression to transformers — theory, math, coding problems, and system design for ML interviews.',
+  'A rigorous guide covering the mathematical foundations, algorithm implementations from scratch, and large-scale ML system design required for senior roles.',
+  (SELECT id FROM public.categories WHERE slug = 'machine-learning'),
+  'advanced', 
+  24.99, 
+  350, 
+  'published', 
+  3, 
+  4.9, 
+  820, 
+  NOW()
+),
+(
+  'DSA Interview Preparation', 
+  'dsa-interview-preparation', 
+  'Kevin Patel', 
+  'Master Data Structures and Algorithms with step-by-step visual explanations of the 50 most common patterns.',
+  'Stop memorizing solutions. This book teaches you the underlying patterns (sliding window, two pointers, BFS/DFS) to solve any algorithm problem.',
+  (SELECT id FROM public.categories WHERE slug = 'dsa'),
+  'intermediate', 
+  0.00, 
+  400, 
+  'published', 
+  3, 
+  4.7, 
+  1500, 
+  NOW()
+),
+(
+  'LangChain Practical Guide', 
+  'langchain-practical-guide', 
+  'Lisa Zhang', 
+  'Build production-ready LLM applications with LangChain, vector databases, and autonomous agents.',
+  'A hands-on engineering guide to building robust applications on top of Large Language Models using the LangChain framework.',
+  (SELECT id FROM public.categories WHERE slug = 'langchain'),
+  'advanced', 
+  21.99, 
+  220, 
+  'published', 
+  3, 
+  4.6, 
+  195, 
+  NOW()
+),
+(
+  'RAG From Basics to Production', 
+  'rag-from-basics-to-production', 
+  'Marcus Johnson', 
+  'Master Retrieval-Augmented Generation. Learn chunking strategies, vector embeddings, and hybrid search.',
+  'The complete guide to grounding LLMs in your own data. This book covers the entire RAG pipeline from document parsing to advanced retrieval techniques.',
+  (SELECT id FROM public.categories WHERE slug = 'rag'),
+  'advanced', 
+  26.99, 
+  250, 
+  'published', 
+  3, 
+  4.8, 
+  310, 
+  NOW()
+),
+(
+  'Generative AI Interview Questions', 
+  'genai-interview-questions', 
+  'Dr. Sophie Lin', 
+  'Prepare for generative AI roles with questions on LLMs, prompt engineering, fine-tuning, and evaluation methods.',
+  'The GenAI field is moving fast. This book compiles the most common interview questions asked for emerging AI Engineering roles in the past year.',
+  (SELECT id FROM public.categories WHERE slug = 'genai'),
+  'intermediate', 
+  19.99, 
+  190, 
+  'published', 
+  3, 
+  4.5, 
+  125, 
+  NOW()
+),
+(
+  'MLOps Interview Handbook', 
+  'mlops-interview-handbook', 
+  'Thomas Wright', 
+  'A comprehensive guide to ML infrastructure, model deployment, CI/CD for ML, and monitoring in production.',
+  'Bridge the gap between data science and DevOps. Learn how to architect systems that continuously train, deploy, and monitor machine learning models at scale.',
+  (SELECT id FROM public.categories WHERE slug = 'mlops'),
+  'advanced', 
+  29.99, 
+  320, 
+  'published', 
+  3, 
+  4.8, 
+  205, 
+  NOW()
+)
+ON CONFLICT (slug) DO NOTHING;
+
+-- Insert Tags
+INSERT INTO public.book_tags (book_id, tag)
+SELECT id, 'SQL' FROM public.books WHERE slug IN ('sql-interview-mastery', '200-sql-interview-questions')
+UNION
+SELECT id, 'Interview Prep' FROM public.books WHERE slug IN ('sql-interview-mastery', 'python-interview-questions', 'pandas-interview-guide')
+UNION
+SELECT id, 'Python' FROM public.books WHERE slug IN ('python-interview-questions', 'python-for-data-analytics')
+ON CONFLICT DO NOTHING;
